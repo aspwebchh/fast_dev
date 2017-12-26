@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<PageGroup id="bbq_update" title="更新服务器数据">
+    <Page mode="view" title="更新服务器数据">
+        <Fields>
+            <Field name="a" title="返回码"></Field>
+            <Field name="b" title="消息"></Field>
+        </Fields>
+        <listen class="bbq_update"></listen>
+    </Page>
+</PageGroup>

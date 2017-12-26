@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6",
+    "noImplicitAny": false,
+    "sourceMap": true
+  },
+
+  "include": [
+    "Z:\\chh\\fast_dev\\js\\ts\\*"
+  ]
+}

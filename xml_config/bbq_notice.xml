@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<PageGroup id="bbq_notice" title="系统公告">
+    <Page mode="list" title="公告列表">
+        <SearchControls>
+            <SearchControl type="bbq_zone_select" name="zone" title="地区"></SearchControl>
+            <SearchControl type="" name="" title=""></SearchControl>
+            <SearchControl type="" name="" title=""></SearchControl>
+            <SearchControl type="" name="" title=""></SearchControl>
+        </SearchControls>
+        <Fields>
+            <Field name="beginTime" title="开始时间"></Field>
+            <Field name="endTime" title="结束时间"></Field>
+            <Field name="interval" title="间隔时间"></Field>
+            <Field name="content" title="内容"></Field>
+            <Field name="act" title="操作"></Field>
+        </Fields>
+        <listen class="bbq_notice_query"></listen>
+    </Page>
+
+    <Page mode="form" title="配置系统公告">
+        <Controls>
+            <Control type="input" validation="required" name="begin_time" title="开始时间"></Control>
+            <Control type="input" validation="required" name="end_time" title="结束时间"></Control>
+            <Control type="input" validation="required|int" name="interval" title="播放间隔" placeholder="以秒为单位"></Control>
+            <Control type="textarea" validation="required" name="content" title="公告内容" multi_lang="0"></Control>
+        </Controls>
+        <listen class="bbq_notice"></listen>
+    </Page>
+
+    <Page mode="view" title="操作结果">
+        <Fields>
+            <Field name="retCode" title="返回码"></Field>
+            <Field name="retmsg" title="消息"></Field>
+            <Field name="map" title="哈哈" type="map">
+                <Field name="a" title="返回码"></Field>
+                <Field name="b" title="返回码"></Field>
+                <Field name="c" title="消息"></Field>
+            </Field>
+            <Field name="list" title="嘿嘿" type="list">
+                <Field name="a" title="返回码"></Field>
+                <Field name="b" title="返回码"></Field>
+                <Field name="c" title="消息"></Field>
+            </Field>
+        </Fields>
+        <listen class=""></listen>
+    </Page>
+</PageGroup>

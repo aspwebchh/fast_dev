@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<PageGroup id="bbq_log_level" title="玩家等级变化查询">
+    <Page mode="list" title="玩家等级变化查询">
+        <SearchControls export="true">
+            <SearchControl type="input" name="zone" title="地区"></SearchControl>
+            <SearchControl type="input" name="account_id" title="账号ID"></SearchControl>
+            <SearchControl type="input" name="iuin" title="角色ID"></SearchControl>
+            <SearchControl type="input" name="begin_time" title="开始时间"></SearchControl>
+            <SearchControl type="input" name="end_time" title="结束时间"></SearchControl>
+            <SearchControl type="input" name="end_time" title="结束时间"></SearchControl>
+            <SearchControl type="input" name="end_time" title="结束时间"></SearchControl>
+            <SearchControl type="input" name="end_time" title="结束时间"></SearchControl>
+        </SearchControls>
+        <Fields>
+            <Field name="zid" title="大区ID"></Field>
+            <Field name="account_type" title="账号类型"></Field>
+            <Field name="account_id" title="账号id"></Field>
+            <Field name="user_id" title="玩家id"></Field>
+            <Field name="iuin" title="角色id"></Field>
+            <Field name="record_time" title="时间"></Field>
+            <Field name="device_os" title="设备操作系统"></Field>
+            <Field name="before_level" title="变化前等级"></Field>
+            <Field name="after_level" title="变化后等级"></Field>
+        </Fields>
+        <listen class="bbq_log_level"></listen>
+    </Page>
+</PageGroup>
