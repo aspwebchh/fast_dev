@@ -135,6 +135,12 @@ namespace gm2{
     }
 
     class View extends Base{
+
+        public static MODE_FROM_SERVER = 1;
+        public static MODE_FROM_STRORAGE = 2;
+
+        private mode : number;
+
         private static getStorageKey ( actionId: string, actionType: string = "" ) {
             return actionId + "_" + MODE_VIEW + "_" + actionType;
         }
@@ -158,10 +164,12 @@ namespace gm2{
             super(actionId, actionType);
             this.dataSource = View.fromLocalStorage(this.actionId, this.actionType);
             if( this.dataSource ) {
+                this.mode = View.MODE_FROM_STRORAGE;
                 this.render().then(()=>{
                     this.hideLoadingBar();
                 });
             } else {
+                this.mode = View.MODE_FROM_SERVER;
                 this.getDataAndRender().then(()=>{
                     this.hideLoadingBar();
                 });
@@ -285,7 +293,14 @@ namespace gm2{
             let title = config.attr("title");
             let fields = config.children("fields");
             let contentHtml = this.genHtml( fields[0], this.dataSource );
-
+            let backBtnHtml = ` <div class="form-group">
+                                                <div class="col-sm-10">
+                                                    <input type="button" class="btn btn-success" value="返回上一页" onclick="window.history.back();"/>
+                                                </div>
+                                            </div>`;
+            if(this.mode == View.MODE_FROM_SERVER) {
+                backBtnHtml = "";
+            }
             let html = `<div class="wrapper wrapper-content animated fadeInRight">
                           <div id="error_txt"></div>
                         <div class="row">
@@ -298,13 +313,7 @@ namespace gm2{
                                     <div class="ibox-content">
                                         <form onsubmit="return false;" class="form-horizontal">
                                               ${contentHtml}
-
-                                            <div class="form-group">
-                                            
-                                                <div class="col-sm-10">
-                                                    <input type="button" class="btn btn-success" value="返回上一页" onclick="window.history.back();"/>
-                                                </div>
-                                            </div>
+                                              ${backBtnHtml}
                                         </form>
                                     </div>
                                 </div>

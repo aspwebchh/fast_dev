@@ -1,16 +1,14 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Admin extends CI_Controller {
+include_once('Backend.php');
+
+class Admin extends Backend {
+	function __construct() {
+		parent::__construct ();
+	}
+
 	public function index() {
 		$this->load->view("admin/index.html");
-	}
-
-	public function article_list() {
-		$this->load->view("admin/_article_list.html");
-	}
-
-	public function article_form() {
-		$this->load->view("admin/_article_form.html");
 	}
 }

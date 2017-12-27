@@ -1,6 +1,7 @@
 <?php
+include_once('Backend.php');
 
-class Gm2 extends CI_Controller{
+class Gm2 extends Backend{
     public function __construct(){
         parent::__construct();
         $this->load->model("m_gm2");
