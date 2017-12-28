@@ -14,5 +14,4 @@ abstract class Backend extends CI_Controller {
             $this->login_model->doLogout ();
         }
     }
-
 }

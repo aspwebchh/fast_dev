@@ -8,7 +8,8 @@ class Welcome extends CI_Controller {
 	}
 
 	public function index() {
-		$this->load->view('welcome_message');
+		redirect("?c=welcome&m=login");
+		//$this->load->view('welcome_message');
 	}
 	
 	public function login() {
@@ -23,5 +24,9 @@ class Welcome extends CI_Controller {
 			$this->login_model->doLogin ( $result ['user_info'] );
 		}
 		echo json_encode($result);
+	}
+
+	public function logout() {
+		$this->login_model->doLogout();
 	}
 }

@@ -22,6 +22,7 @@
             <Field name="device_os" title="设备操作系统"></Field>
             <Field name="before_level" title="变化前等级"></Field>
             <Field name="after_level" title="变化后等级"></Field>
+            <Field name="act" title="编辑"></Field>
         </Fields>
         <listen class="bbq_log_level"></listen>
     </Page>
