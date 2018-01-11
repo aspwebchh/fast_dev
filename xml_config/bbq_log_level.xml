@@ -22,8 +22,69 @@
             <Field name="device_os" title="设备操作系统"></Field>
             <Field name="before_level" title="变化前等级"></Field>
             <Field name="after_level" title="变化后等级"></Field>
-            <Field name="act" title="编辑"></Field>
+            <Field name="act" title="操作"  operate="1">
+                <Edit KeyField="id"></Edit>
+                <Delete KeyField="id"></Delete>
+            </Field>
         </Fields>
         <listen class="bbq_log_level"></listen>
     </Page>
+
+    <Page mode="form" title="玩家等级变化添加">
+        <Controls>
+            <Control type="input" validation="required" name="begin_time" title="开始时间"></Control>
+            <Control type="input" validation="required" name="end_time" title="结束时间"></Control>
+            <Control type="input" validation="required|int" name="interval" title="播放间隔" placeholder="以秒为单位"></Control>
+            <Control type="textarea" validation="required" name="content" title="公告内容" multi_lang="0"></Control>
+        </Controls>
+        <listen class="bbq_log_level_add"></listen>
+    </Page>
+
+    <Page mode="form" title="玩家等级变化编辑" type="edit">
+        <Controls>
+            <Control type="input" validation="required" name="begin_time" title="开始时间"></Control>
+            <Control type="input" validation="required" name="end_time" title="结束时间"></Control>
+            <Control type="input" validation="required|int" name="interval" title="播放间隔" placeholder="以秒为单位"></Control>
+            <Control type="textarea" validation="required" name="content" title="公告内容" multi_lang="0"></Control>
+        </Controls>
+        <listen class="bbq_log_level_edit"></listen>
+    </Page>
+
+    <Page mode="view" type="delete" title="删除">
+        <Fields>
+            <Field name="retCode" title="返回码"></Field>
+            <Field name="retmsg" title="消息"></Field>
+            <Field name="map" title="哈哈" type="map">
+                <Field name="a" title="返回码"></Field>
+                <Field name="b" title="返回码"></Field>
+                <Field name="c" title="消息"></Field>
+            </Field>
+            <Field name="list" title="嘿嘿" type="list">
+                <Field name="a" title="返回码"></Field>
+                <Field name="b" title="返回码"></Field>
+                <Field name="c" title="消息"></Field>
+            </Field>
+        </Fields>
+        <listen class="bbq_log_level_del"></listen>
+    </Page>
+
+    <Page mode="view" type="edit"  title="操作结果">
+        <Fields>
+            <Field name="retCode" title="返回码"></Field>
+            <Field name="retmsg" title="消息"></Field>
+            <Field name="map" title="哈哈" type="map">
+                <Field name="a" title="返回码"></Field>
+                <Field name="b" title="返回码"></Field>
+                <Field name="c" title="消息"></Field>
+            </Field>
+            <Field name="list" title="嘿嘿" type="list">
+                <Field name="a" title="返回码"></Field>
+                <Field name="b" title="返回码"></Field>
+                <Field name="c" title="消息"></Field>
+            </Field>
+        </Fields>
+        <listen class="bbq_log_level_edit"></listen>
+    </Page>
+
+
 </PageGroup>

@@ -2,7 +2,7 @@
 
 loadGm2ClassFile("bbq_base.php");
 
-class bbq_update extends bbq_base {
+class bbq_log_level_del extends bbq_base {
     public function data() {
         return  array(
             "retCode" => 0,
@@ -26,7 +26,7 @@ class bbq_update extends bbq_base {
                 array(
                     "a" => 1,
                     "b" => 2,
-                    "c" => 3
+                    "c" => "xxxxxxxxx"
                 ),
             )
         );

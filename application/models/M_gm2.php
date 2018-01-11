@@ -46,8 +46,15 @@ class M_gm2 extends CI_Model{
         foreach($pages as $page) {
             $mode = $page->attributes->getNamedItem("mode")->textContent;
             $type = @$page->attributes->getNamedItem("type")->textContent;
-            if( $mode == $actionMode && (!empty($type) || $type == $actionType ) ) {
-                return $page->ownerDocument->saveXML($page);
+            if(empty($type)) {
+                $type = "";
+            }
+            if(empty($actionType)) {
+                $actionType = "";
+            }
+            if($mode == $actionMode && $type == $actionType) {
+                $resultXml = $page->ownerDocument->saveXML($page);
+                return $resultXml;
             }
         }
         return null;

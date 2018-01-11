@@ -63,6 +63,32 @@ namespace gm2{
                 data.set("multi_lang", item.getAttribute("multi_lang") || "0")
                 data.set( "type", type );
                 data.set("placeholder", item.getAttribute("placeholder"));
+                let isOperate = item.getAttribute("operate") == "1" ? 1 : 0;
+                let operate = [];
+                if( isOperate ) {
+                    let editElements = item.getElementsByTagName("Edit");
+                    if( editElements.length > 0 ) {
+                        let editElement = editElements[0];
+                        let keyField = editElement.getAttribute("KeyField");
+                        let operateItem = {};
+                        operateItem["type"] = "edit";
+                        operateItem["title"] = "编辑";
+                        operateItem["key_field"] = keyField;
+                        operate.push(operateItem);
+                    }
+                    let delElements = item.getElementsByTagName("Delete");
+                    if( delElements.length > 0 ) {
+                        let delElement = delElements[0];
+                        let keyField = delElement.getAttribute("KeyField");
+                        let operateItem = {};
+                        operateItem["type"] = "delete";
+                        operateItem["title"] = "删除";
+                        operateItem["key_field"] = keyField;
+                        operate.push(operateItem);
+                    }
+                }
+                data.set("operate",operate);
+
                 let listItems = $(item).children("ListItem");
                 if( listItems.length > 0 )  {
                     let listItemData = [];
@@ -520,7 +546,6 @@ namespace gm2{
             let controlHtml = await this.renderAction( this.attrs( controls ) );
             let data = await this.getListData();
             let dic = this.getDataListDic( this.attrs( fields ) );
-
             let container = $('<div class="wrapper wrapper-content animated fadeInRight"></div>');
             let html = await this.renderList( this.attrs( fields ), controlHtml, data );
             container.append(searchHtml).append( html );
@@ -687,7 +712,33 @@ namespace gm2{
             }
             data.data_list = data.data_list.filter(item=> item != null);
             let tbody = data.data_list.map(dataItem=>{
-                let trow = struct.map( structItem => "<td>" + (dataItem[ structItem.get("name") ])+ "</td>").join("");
+                let trow = struct.map( structItem => {
+                    let colContent = dataItem[ structItem.get("name") ] || "";
+                    //处理自定义模式
+                    let operate = structItem.get("operate");
+                    if(operate && operate.length > 0) {
+                        let html = operate.map( item => {
+                            let type = item.type;
+                            let title = item.title;
+                            let keyField = item.key_field;
+                            if( type == "edit" ) {
+                                let key = dataItem[keyField] || "";
+                                let link = `<a href="index.php?m=index&c=gm2&action_id=${this.actionId}&action_mode=form&action_type=${type}&${keyField}=${key}">${title}</a>`;
+                                return link;
+                            } else if( type == "delete") {
+                                let key = dataItem[keyField] || "";
+                                let link = `<a onclick="return confirm('确定要删除吗？')" href="index.php?m=index&c=gm2&action_id=${this.actionId}&action_mode=view&action_type=${type}&${keyField}=${key}">${title}</a>`;
+                                return link;
+                            } else {
+                                return "";
+                            }
+                        }).join(" ");
+                        html = `<td>${colContent} ${html}</td>`;
+                        return html;
+                    } else {
+                        return "<td>" + colContent + "</td>";
+                    }
+                }).join("");
                 return `<tr class="gradeA">
                             ${trow}
                         </tr>`;
@@ -712,7 +763,6 @@ namespace gm2{
                                             </tbody>
                                         </table>
                                         <div class="row" id="page1">
-
 
                                           </div>
                                     </div>
