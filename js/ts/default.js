@@ -142,6 +142,22 @@ var gm2;
                 });
             });
         }
+        callOnloadScript(onloadControls) {
+            let items = gm2.jquery2HtmlElements(onloadControls.find("Control"));
+            let controls = items.map(item => item.getAttribute("type"));
+            for (let i = 0; i < controls.length; i++) {
+                let controlName = controls[i];
+                let basePath = window.location.href.match(".+(?=index.php)");
+                let controlScriptPath = basePath + "/js/ts/onload/" + controlName + ".js?v=18";
+                let script = document.createElement("script");
+                script.onload = () => {
+                    let control = eval(`new gm2.control.${controlName}();`);
+                    control.run();
+                };
+                script.src = controlScriptPath;
+                document.body.appendChild(script);
+            }
+        }
         callControlRenderCompleteFn(controls) {
             controls.forEach((item) => {
                 item.onRenderComplete();
@@ -527,6 +543,7 @@ var gm2;
                 this.callControlRenderCompleteFn(this.controls);
                 this.initSearchFormEvent(dic);
                 this.renderPage(data.data_count);
+                this.callOnloadScript(config.find("Onload"));
             });
         }
         renderPage(dataCount) {

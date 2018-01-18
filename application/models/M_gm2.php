@@ -52,7 +52,7 @@ class M_gm2 extends CI_Model{
             if(empty($actionType)) {
                 $actionType = "";
             }
-            if($mode == $actionMode && $type == $actionType) {
+            if( $mode == $actionMode && $type == $actionType ) {
                 $resultXml = $page->ownerDocument->saveXML($page);
                 return $resultXml;
             }
@@ -61,7 +61,7 @@ class M_gm2 extends CI_Model{
     }
 
     public function getAction( $actionId, $actionMode,$actionType ) {
-        $acitonXml = $this->getActionXml($actionId, $actionMode, $actionType);
+        $acitonXml = $this->getActionXml( $actionId, $actionMode, $actionType );
         $doc =  new DOMDocument();
         $doc->loadXML($acitonXml);
         return $doc;

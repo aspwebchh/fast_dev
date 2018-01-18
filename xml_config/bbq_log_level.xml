@@ -27,6 +27,9 @@
                 <Delete KeyField="id"></Delete>
             </Field>
         </Fields>
+        <Onload>
+            <Control type="bbq_gift_load"></Control>
+        </Onload>
         <listen class="bbq_log_level"></listen>
     </Page>
 

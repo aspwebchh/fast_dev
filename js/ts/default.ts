@@ -149,6 +149,23 @@ namespace gm2{
             });
         }
 
+        protected callOnloadScript( onloadControls : JQuery) {
+            let items = jquery2HtmlElements( onloadControls.find("Control") );
+            let controls = items.map( item => item.getAttribute("type") );
+            for(let i = 0; i < controls.length; i++) {
+                let controlName = controls[i];
+                let basePath = window.location.href.match(".+(?=index.php)");
+                let controlScriptPath = basePath + "/js/ts/onload/" + controlName + ".js?v=18";
+                let script = document.createElement("script");
+                script.onload = () => {
+                    let control = eval(`new gm2.control.${controlName}();`) as control.load_base;
+                    control.run();
+                }
+                script.src = controlScriptPath;
+                document.body.appendChild(script);
+            }
+        }
+
         protected callControlRenderCompleteFn( controls: control.fbase[]) {
             controls.forEach( (item:control.fbase) =>{
                 item.onRenderComplete();
@@ -554,6 +571,7 @@ namespace gm2{
             this.callControlRenderCompleteFn( this.controls );
             this.initSearchFormEvent( dic );
             this.renderPage( data.data_count );
+            this.callOnloadScript(config.find("Onload"));
         }
 
         private renderPage( dataCount: number ) {
