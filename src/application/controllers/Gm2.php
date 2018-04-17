@@ -23,8 +23,8 @@ class Gm2 extends Backend{
         $result = $this->m_gm2->getActionList();
         echo json_encode($result);
     }
-
-    public function forList() {
+    
+    public function call() {
         $actionId = $this->input->get("action_id");
         $actionMode = $this->input->get("action_mode");
         $method = $this->input->get("method");
@@ -32,29 +32,4 @@ class Gm2 extends Backend{
         $result = $this->m_gm2->callListenClass($actionId,$actionMode, $method, $actionType);
         echo json_encode($result);
     }
-
-    public function forForm() {
-        $actionId = $this->input->get("action_id");
-        $actionMode = $this->input->get("action_mode");
-        $method = $this->input->get("method");
-        $actionType = $this->input->get("action_type");
-        $result =  $this->m_gm2->callListenClass( $actionId, $actionMode, $method, $actionType );
-        echo json_encode($result);
-    }
-
-    public function forView() {
-        $actionId = $this->input->get("action_id");
-        $actionMode = $this->input->get("action_mode");
-        $method = $this->input->get("method");
-        $actionType = $this->input->get("action_type");
-        $result =  $this->m_gm2->callListenClass( $actionId, $actionMode, $method, $actionType );
-        echo json_encode($result);
-    }
-	
-	public function forZone(){
-		$actionId = $this->input->get("action_id");
-        $method = $this->input->get("method");
-        $result =  $this->m_gm2->getZoneList( $actionId, $method);
-        echo json_encode($result);
-	}
 }

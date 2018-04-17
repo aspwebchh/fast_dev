@@ -228,7 +228,7 @@ namespace gm2{
             let query = queryString();
             query.set("method","data");
             query.set("c","gm2");
-            query.set("m","forView");
+            query.set("m","call");
             let url = `index.php?` + $.param(mapToObject(query));
             let result = await ajaxAsync( url,null,"GET","json");
             return result;
@@ -396,7 +396,7 @@ namespace gm2{
             }
             let query = queryString();
             let zone = query.get("zone");
-            let url = `index.php?c=gm2&m=forForm&action_id=${this.actionId}&action_mode=${MODE_FORM}&method=data&action_type=${this.actionType}&zone=${zone}`;
+            let url = `index.php?c=gm2&m=call&action_id=${this.actionId}&action_mode=${MODE_FORM}&method=data&action_type=${this.actionType}&zone=${zone}`;
             url = this.attachId(url);
             let result = await ajaxAsync( url, null );
             this.controls.forEach(item=>{
@@ -446,7 +446,7 @@ namespace gm2{
                     data[control.name()] = control.getValue();
                     return data;
                 } ,{});
-                let url = `index.php?c=gm2&m=forForm&action_id=${this.actionId}&action_mode=${MODE_FORM}&method=submit&action_type=${this.actionType}`;
+                let url = `index.php?c=gm2&m=call&action_id=${this.actionId}&action_mode=${MODE_FORM}&method=submit&action_type=${this.actionType}`;
                 url = this.attachId(url);
                 //submitBtn.attr("disabled","disabled");
                 //submitBtn.html("请等待...");
@@ -603,7 +603,7 @@ namespace gm2{
             $("#export_btn").bind("click", ()=>{
                 let query = queryString();
                 query.set("method","export");
-                query.set("m","forList");
+                query.set("m","call");
                 let url = `index.php?` + $.param( mapToObject( query ) ) + "&dic=" + JSON.stringify(dataListDic) ;
                 window.location.href = url;
             });
@@ -696,7 +696,7 @@ namespace gm2{
         private async getListData() : Promise<ListResult> {
             let query = queryString();
             query.set("c","gm2");
-            query.set("m","forList");
+            query.set("m","call");
             query.set("method","getList");
             let url = `index.php?` + $.param(mapToObject(query));
             let result = await ajaxAsync( url,null,"GET","json");
